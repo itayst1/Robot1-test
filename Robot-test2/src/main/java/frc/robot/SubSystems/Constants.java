@@ -117,9 +117,9 @@ public final class Constants {
         ANGLE_TOLERANCE = 0.25,
 
         // Velocity PID Variables \\
-        VELOCITY_KP = 0.0468 * 1.7,
-        VELOCITY_KI = 0.0011,
-        VELOCITY_KD = 0.01,
+        VELOCITY_KP = 0.0468 * 2,
+        VELOCITY_KI = 0.001,
+        VELOCITY_KD = 0.001,
 
         // Distance PID Varibles \\
         DISTANCE_KP = 0,

@@ -7,8 +7,6 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 public class Vision {
 

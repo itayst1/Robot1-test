@@ -73,35 +73,17 @@ public class Robot extends TimedRobot {
   @Override
   public void testInit() {
     Chassis.getInstance();
-   SmartDashboard.putNumber("motorSpeed", 0.4);
-  //  Chassis.getInstance();
-  //  if (Chassis.getInstance().getDefaultCommand() == null)
-      //Chassis.getInstance().setDefaultCommand(new VectorDrive(Controls.m_leftJoystick::getY, Controls.m_rightJoystick::getY));
-      // Chassis.getInstance().setDefaultCommand(new PrintCommand("Hello1"));
-
-    //  Chassis.getInstance().setDefaultCommand(new VectorDrive(Controls.m_leftJoystick::getY, Controls.m_rightJoystick::getY));
+   SmartDashboard.putNumber("motorSpeed", 0.1);
+  //  CommandScheduler.getInstance().schedule(new DriveToCenter(0.1, 0.1));
+  //  CommandScheduler.getInstance().run();
   }
 
   @Override
   public void testPeriodic() {
-    //  VectorDrive.getInstance().execute();
-    DriveToCenter.getInstance().execute();
-    // CommandScheduler.getInstance().schedule(new VectorDrive(Controls.m_leftJoystick::getY, Controls.m_rightJoystick::getY));
-    // CommandScheduler.getInstance().run();
-    // SmartDashboard.putString("defCom", Chassis.getInstance().getDefaultCommand() != null?Chassis.getInstance().getDefaultCommand().toString(): "null");
-    
-  }
-  // @Override
-  // public void testExit() {
-  //   CommandBase s = new WaitCommand(0.1);
-  //   s.addRequirements(PrintCommand);
-  //   Chassis.getInstance().setDefaultCommand(s);
-  //   SmartDashboard.putString("defCom", Chassis.getInstance().getDefaultCommand() != null?Chassis.getInstance().getDefaultCommand().toString(): "null");
-  // }
-
-  @Override
-  public void testExit() {
-    Chassis.getInstance().setDefaultCommand(new VectorDrive(Controls.m_leftJoystick::getY, Controls.m_rightJoystick::getY));
+    // VectorDrive.getInstance().execute();
+    // DriveToCenter.getInstance().execute();  
+    // Chassis.getInstance().driveStraight(0.1);
+    Chassis.getInstance().driveStraight(-0.1);
   }
 
   @Override
