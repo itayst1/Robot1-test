@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Chassis extends SubsystemBase {
 
@@ -24,6 +25,7 @@ public class Chassis extends SubsystemBase {
         // m_leftEngineVictorBack=new WPI_VictorSPX(Constants.MotorPorts.chassisLeftBack);
         m_rightEngineTalonFront=new WPI_TalonSRX(Constants.MotorPorts.chassisRightFront);
         m_rightEngineTalonMiddle=new WPI_TalonSRX(Constants.MotorPorts.chassisRightMiddle);
+        m_rightEngineTalonMiddle.setInverted(true);
         // m_rightEngineVictorBack=new WPI_VictorSPX(Constants.MotorPorts.chassisRightBack);
         // leftMotors=new MotorControllerGroup(m_leftEngineVictorBack, m_leftEngineVictorFront, m_leftEngineVictorMiddle);
         // rightMotors=new MotorControllerGroup(m_rightEngineVictorBack, m_rightEngineVictorFront, m_rightEngineVictorMiddle);

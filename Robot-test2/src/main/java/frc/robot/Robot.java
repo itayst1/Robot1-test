@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Commands.DriveBySuplliers;
 import frc.robot.Commands.DriveForward;
 import frc.robot.Commands.DriveToCenter;
+import frc.robot.Commands.EncodersPID;
 import frc.robot.Commands.VectorDrive;
 import frc.robot.SubSystems.Chassis;
 
@@ -70,20 +72,27 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
   }
 
+  DriveToCenter d;
+  EncodersPID e;
+
   @Override
   public void testInit() {
     Chassis.getInstance();
-   SmartDashboard.putNumber("motorSpeed", 0.1);
+  //  SmartDashboard.putNumber("motorSpeed", 0.3);
+   SmartDashboard.putNumber("target", 10);
   //  CommandScheduler.getInstance().schedule(new DriveToCenter(0.1, 0.1));
   //  CommandScheduler.getInstance().run();
+  // d=new DriveToCenter(0.1, 0.1);
   }
 
   @Override
   public void testPeriodic() {
     // VectorDrive.getInstance().execute();
-    // DriveToCenter.getInstance().execute();  
-    // Chassis.getInstance().driveStraight(0.1);
-    Chassis.getInstance().driveStraight(-0.1);
+    // d.execute();
+    EncodersPID.getInstance().execute();
+    // Chassis.getInstance().driveTank(-0.3,-0.333);
+    // Chassis.getInstance().driveStraight(0.6);
+    // Chassis.getInstance().driveStraight(-0.1);
   }
 
   @Override

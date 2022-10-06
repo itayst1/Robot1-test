@@ -7,6 +7,8 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class Vision {
 
@@ -29,61 +31,61 @@ public class Vision {
             e.printStackTrace();
         }
 
-    //     m_visionThread = new Thread(()->{
-    //         while(true){
-    //             try {
-    //                 SmartDashboard.putString("test", "test");
-    //                 m_socket.receive(m_packet);
-    //                 float[] new_locals = new float[]{(ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat()),
-    //                     (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(4)),
-    //                     (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(8))};
-    //                 m_lastLocals = m_locals.clone();
-    //                 m_locals = new_locals;
-    //                 }
-    //                 catch (IOException e) {
-    //                 float[] tempLocals = m_locals.clone();
-    //                 for(int i=0; i<m_locals.length; i++){
-    //                     m_locals[i]+=(m_locals[i]-m_lastLocals[i]);
-    //                 }
-    //                 m_lastLocals=tempLocals.clone();
+        m_visionThread = new Thread(()->{
+            while(true){
+                try {
+                    m_socket.receive(m_packet);
+                    float[] new_locals = new float[]{(ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat()),
+                        (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(4)),
+                        (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(8))};
+                    m_lastLocals = m_locals.clone();
+                    m_locals = new_locals;
+                    }
+                    catch (Exception e) {
+                    float[] tempLocals = m_locals.clone();
+                    for(int i=0; i<m_locals.length; i++){
+                        m_locals[i]+=(m_locals[i]-m_lastLocals[i]);
+                    }
+                    m_lastLocals=tempLocals.clone();
+                }
+            }
+        });
+        m_visionThread.setDaemon(true);
+        m_visionThread.start();
+    }
+
+    // public void getLocals(){
+    //     try {
+    //         m_socket.receive(m_packet);
+        
+    //             float[] new_locals = new float[]{(ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat()),
+    //                 (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(4)),
+    //                 (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(8))};
+    //             for(int i=0; i<m_locals.length; i++){
+    //                 m_lastLocals[i] = m_locals[i];
+    //             }
+    //             for(int i=0; i<m_locals.length; i++){
+    //                 m_locals[i] = new_locals[i];
     //             }
     //         }
-    //     });
-    //     m_visionThread.setDaemon(true);
-    //     m_visionThread.start();
-    }
-
-    public void getLocals(){
-        try {
-            m_socket.receive(m_packet);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-                float[] new_locals = new float[]{(ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat()),
-                    (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(4)),
-                    (ByteBuffer.wrap(m_packet.getData()).order(ByteOrder.LITTLE_ENDIAN).getFloat(8))};
-                for(int i=0; i<m_locals.length; i++){
-                    m_lastLocals[i] = m_locals[i];
-                }
-                for(int i=0; i<m_locals.length; i++){
-                    m_locals[i] = new_locals[i];
-                }
-                
-    }
+    //         catch(Exception e){
+    //             e.printStackTrace();
+    //         }
+    // }
 
     public float[] getXYZ(){
-        this.getLocals();
+        // this.getLocals();
         return m_locals; 
     }
 
     public double getAngleX(){
-        this.getLocals();
+        // this.getLocals();
         float[] temp=getXYZ();
         return Math.toDegrees(Math.atan(temp[0]/temp[2]))*-1;
     }
 
     public double getAngleY(){
-        this.getLocals();
+        // this.getLocals();
         float[] temp=getXYZ();
         return Math.toDegrees(Math.atan(temp[1]/temp[2]))*-1;
     }

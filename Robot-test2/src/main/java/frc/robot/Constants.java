@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.SubSystems;
+package frc.robot;
 
 import java.util.function.Supplier;
 
@@ -117,9 +117,9 @@ public final class Constants {
         ANGLE_TOLERANCE = 0.25,
 
         // Velocity PID Variables \\
-        VELOCITY_KP = 0.0468 * 2,
-        VELOCITY_KI = 0.001,
-        VELOCITY_KD = 0.001,
+        VELOCITY_KP = 0.0468,
+        VELOCITY_KI = 0.0000001,
+        VELOCITY_KD = 0.044,
 
         // Distance PID Varibles \\
         DISTANCE_KP = 0,
