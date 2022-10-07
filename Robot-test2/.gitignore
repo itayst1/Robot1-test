@@ -29,6 +29,7 @@
 *.la
 *.a
 *.lib
+*release\wpimath.pdb
 
 # Executables
 *.exe
